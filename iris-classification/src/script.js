@@ -1,86 +1,93 @@
 const Iris = (function() {
-  const init = async () => {
-    const { irisRawData, testData } = await loadIrisData();
-    doIrisClassification(irisRawData, testData);
-  };
 
-  const loadIrisData = async () => {
-    const rawData = await fetch('data/iris-training.json');
-    const rawTestData = await fetch('data/iris.json');
-    const irisRawData = await rawData.json();
-    const testData = await rawTestData.json();
-    return {
+  const init = async () => {
+    const {
       irisRawData,
       testData
-    };
-  };
-
-  function doIrisClassification(rawTrainingData, testData) {
-    console.log(rawTrainingData, testData);
-    // convert/setup our data
-    const trainingdata = tf.tensor2d(
-      rawTrainingData.map(item => [
-        item.sepallength,
-        item.sepalwidth,
-        item.petallength,
-        item.petalwidth
-      ])
-    );
-    const testingData = tf.tensor2d(
-      testData.map(item => [
-        item.sepallength,
-        item.sepalwidth,
-        item.petallength,
-        item.petalwidth
-      ])
-    );
-    const outputData = tf.tensor2d(
-      rawTrainingData.map(item => [
-        item.species === 'setosa' ? 1 : 0,
-        item.species === 'virginica' ? 1 : 0,
-        item.species === 'versicolor' ? 1 : 0
-      ])
-    );
-    outputData.print();
-
-    // build nueral network
-    const model = tf.sequential();
-
-    model.add(
-      tf.layers.dense({
-        inputShape: [4],
-        activation: 'sigmoid',
-        units: 5
-      })
-    );
-    model.add(
-      tf.layers.dense({
-        inputShape: [5],
-        activation: 'sigmoid',
-        units: 3
-      })
-    );
-    model.add(
-      tf.layers.dense({
-        activation: 'sigmoid',
-        units: 3
-      })
-    );
-
-    model.compile({
-      loss: 'meanSquaredError',
-      optimizer: tf.train.adam(0.06)
-    });
-
-    // train
-    model.fit(trainingdata, outputData, { epochs: 1000 }).then(history => {
-      model.predict(testingData).print();
-    });
+    } = await loadIrisData();
+    doIrisClassification(irisRawData, testData);
   }
 
+  const loadIrisData = async () => {
+    const [rawData, rawTestData] = await Promise.all([fetch('data/iris-training.json'), fetch('data/iris.json')]);
+    const [irisRawData, testData] = await Promise.all(rawData.json(), rawTestData.json()]);
   return {
-    init
+    irisRawData,
+    testData
   };
+};
+
+function doIrisClassification(rawTrainingData, testData) {
+  // convert/setup our data
+  const trainingdata = tf.tensor2d(
+    rawTrainingData.map(item => [
+      item.sepalLength,
+      item.sepalWidth,
+      item.petalLength,
+      item.petalWidth
+    ])
+  );
+  const testingData = tf.tensor2d(
+    testData.map(item => [
+      item.sepalLength,
+      item.sepalWidth,
+      item.petalLength,
+      item.petalWidth
+    ])
+  );
+  const outputData = tf.tensor2d(
+    rawTrainingData.map(item => [
+      item.species === 'setosa' ? 1 : 0,
+      item.species === 'virginica' ? 1 : 0,
+      item.species === 'versicolor' ? 1 : 0
+    ])
+  );
+  trainingdata.print();
+
+  // build nueral network
+  const model = tf.sequential();
+
+  model.add(
+    tf.layers.dense({
+      inputShape: [4],
+      activation: 'sigmoid',
+      units: 5
+    })
+  );
+  model.add(
+    tf.layers.dense({
+      inputShape: [5],
+      activation: 'sigmoid',
+      units: 3
+    })
+  );
+  model.add(
+    tf.layers.dense({
+      activation: 'sigmoid',
+      units: 3
+    })
+  );
+
+  model.compile({
+    loss: 'meanSquaredError',
+    optimizer: tf.train.adam(0.06)
+  });
+
+
+  const time = Date.now();
+  // train
+  model.fit(trainingdata, outputData, {
+    epochs: 100
+  }).then(history => {
+    console.log(`%c Time taken to train is ${Date.now() - time} seconds`, `background: #222; color: #bada55`)
+    model.predict(testingData).print();
+  });
+}
+
+return {
+  init
+};
+
 })();
 
 Iris.init();
