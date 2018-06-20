@@ -1,0 +1,23 @@
+[
+  {
+    "sepalLength": 5.1,
+    "sepalWidth": 3.7,
+    "petalLength": 1.5,
+    "petalWidth": 0.4,
+    "species": "setosa"
+  },
+  {
+    "sepalLength": 6.0,
+    "sepalWidth": 2.9,
+    "petalLength": 4.5,
+    "petalWidth": 1.5,
+    "species": "versicolor"
+  },
+  {
+    "sepalLength": 7.7,
+    "sepalWidth": 2.8,
+    "petalLength": 6.7,
+    "petalWidth": 2.0,
+    "species": "virginica"
+  }
+]
