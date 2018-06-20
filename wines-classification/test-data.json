@@ -1,0 +1,50 @@
+[
+   {
+      "class":"1",
+      "Alcohol":"13.86",
+      "Malic acid":"1.35",
+      "Ash":"2.27",
+      "Alcalinity of ash":"16",
+      "Magnesium":"98",
+      "Total phenols":"2.98",
+      "Flavanoids":"3.15",
+      "Nonflavanoid phenols":".22",
+      "Proanthocyanins":"1.85",
+      "Color intensity":"7.22",
+      "Hue":"1.01",
+      "OD280/OD315 of diluted wines":"3.55",
+      "Proline":"1045"
+   },
+   {
+      "class":"2",
+      "Alcohol":"13.05",
+      "Malic acid":"5.8",
+      "Ash":"2.13",
+      "Alcalinity of ash":"21.5",
+      "Magnesium":"86",
+      "Total phenols":"2.62",
+      "Flavanoids":"2.65",
+      "Nonflavanoid phenols":".3",
+      "Proanthocyanins":"2.01",
+      "Color intensity":"2.6",
+      "Hue":".73",
+      "OD280/OD315 of diluted wines":"3.1",
+      "Proline":"380"
+   },
+   {
+      "class":"3",
+      "Alcohol":"12.86",
+      "Malic acid":"1.35",
+      "Ash":"2.32",
+      "Alcalinity of ash":"18",
+      "Magnesium":"122",
+      "Total phenols":"1.51",
+      "Flavanoids":"1.25",
+      "Nonflavanoid phenols":".21",
+      "Proanthocyanins":".94",
+      "Color intensity":"4.1",
+      "Hue":".76",
+      "OD280/OD315 of diluted wines":"1.29",
+      "Proline":"630"
+   }
+]
